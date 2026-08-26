@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#141A2E"/>
+      <stop offset="100%" stop-color="#05060B"/>
+    </radialGradient>
+    <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6BFFB0"/>
+      <stop offset="100%" stop-color="#22E06A"/>
+    </linearGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="14" result="blur1"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bgGlow)"/>
+
+  <!-- faint ring -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="#22E06A" stroke-opacity="0.16" stroke-width="2"/>
+
+  <!-- crescent moon, neon green, glowing -->
+  <g filter="url(#glow)">
+    <path d="M330 60C220 60 130 150 130 260C130 370 220 460 330 460C362 460 392 452 418 438C378 448 335 434 305 404C255 354 255 246 305 196C328 173 358 158 390 158C400 158 410 159 419 161C400 105 368 60 330 60Z"
+      fill="url(#moonGrad)"/>
+  </g>
+</svg>
