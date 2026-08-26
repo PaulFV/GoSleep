@@ -1,79 +1,38 @@
-# GoSleep
+# 🌙 GoSleep
 
-GoSleep ist eine moderne, responsive Schlaf-Web-App mit neon-grünem Halbmond-Branding.
+Eine einfache, dunkle Dashboard-Oberfläche zur Schlafüberwachung – als statische HTML/CSS-Seite umgesetzt.
 
-## Funktionen
+## Features
 
-- Animierter Sternenhimmel
-- Neon-grünes Halbmond-Logo und Favicon
-- Live-Uhr
-- Einschlaf-Timer mit Vollbild-Schlafmodus
-- Schlafzyklus-Rechner
-- Wochenstatistik
-- Traumtagebuch mit lokaler Speicherung
-- Responsive Navigation für Desktop und Mobilgeräte
+- 😴 Anzeige der Schlafqualität mit Fortschrittsbalken
+- ⏰ Anzeige des nächsten Weckers
+- 📊 Wochen-/Monatsstatistik
+- 🌙 Schlafzyklus-Berechnung (Aufstehzeit basierend auf vollständigen Zyklen)
+- Responsives Karten-Layout (Grid)
+- Dunkles Design mit Akzentfarbe Cyan (#00BCD4)
 
-> Hinweis: Die angezeigten Schlafzeiten und Angaben sind Demonstrationswerte und keine medizinische Bewertung.
+## Nutzung
 
-## Lokal starten
-
-Voraussetzung: eine aktuelle Node.js-/npm-Installation.
+Einfach `index.html` im Browser öffnen – keine Abhängigkeiten, kein Build-Prozess nötig.
 
 ```bash
-npm install
-npm run dev
+open index.html
 ```
 
-Anschließend die von Vite angezeigte lokale Adresse im Browser öffnen.
+## Projektstruktur
 
-## Produktionsversion erstellen
-
-```bash
-npm run build
-npm run preview
 ```
-
-Der fertige Build liegt danach im Ordner `dist`.
-
-## Auf GitHub hochladen
-
-1. Neues Repository mit dem Namen `GoSleep` anlegen.
-2. Den Inhalt dieses Projektordners in das Repository kopieren.
-3. Änderungen committen und pushen.
-
-```bash
-git init
-git add .
-git commit -m "Initial GoSleep release"
-git branch -M main
-git remote add origin DEINE_REPOSITORY_ADRESSE
-git push -u origin main
-```
-
-## GitHub Pages
-
-Die Vite-Konfiguration verwendet `base: './'`, damit der erzeugte Build auch aus einem Unterordner geladen werden kann. Für eine Veröffentlichung kann der Inhalt von `dist` über den gewünschten GitHub-Pages-Workflow bereitgestellt werden.
-
-## Struktur
-
-```text
 GoSleep/
-├── public/
-│   └── moon-neon.svg
-├── src/
-│   ├── components/
-│   ├── utils/
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── .gitignore
-├── index.html
-├── LICENSE
-├── package.json
-├── README.md
-└── vite.config.js
+├── index.html   # Komplette App (HTML + CSS inline)
+└── README.md
 ```
 
-## Lizenz
+## Nächste Schritte / Ideen
 
-MIT
+- Buttons (Schlafen, Wecker, Statistik, Tagebuch, Einstellungen) mit Funktionalität verknüpfen
+- Daten dynamisch statt statisch anzeigen (z. B. via LocalStorage oder Backend)
+- JavaScript für echte Wecker- und Timer-Logik ergänzen
+
+---
+
+GoSleep v1.0 • Sleep Better
