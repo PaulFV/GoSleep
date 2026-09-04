@@ -1,7 +1,8 @@
-const CACHE_NAME = 'gosleep-v2';
+const CACHE_NAME = 'gosleep-v4';
 const APP_ASSETS = [
     './',
     './index.html',
+    './push-config.js',
     './manifest.json',
     './icons/favicon-32.png',
     './icons/apple-touch-icon.png',
@@ -38,4 +39,40 @@ self.addEventListener('fetch', event => {
             throw new Error('Offline resource unavailable');
         }))
     );
+});
+
+self.addEventListener('push', event => {
+    const fallback = {
+        title:'GoSleep',
+        body:'Guten Morgen! Dein Wecker klingelt.',
+        tag:'gosleep-alarm',
+        url:'./'
+    };
+    let data = fallback;
+    if(event.data){
+        try{
+            data = { ...fallback, ...event.data.json() };
+        } catch(error){
+            data = { ...fallback, body:event.data.text() || fallback.body };
+        }
+    }
+    event.waitUntil(self.registration.showNotification(data.title, {
+        body:data.body,
+        icon:'./icons/icon-192.png',
+        badge:'./icons/favicon-32.png',
+        tag:data.tag,
+        renotify:true,
+        requireInteraction:true,
+        data:{ url:data.url || './' }
+    }));
+});
+
+self.addEventListener('notificationclick', event => {
+    event.notification.close();
+    const destination = new URL(event.notification.data?.url || './', self.registration.scope).href;
+    event.waitUntil(self.clients.matchAll({ type:'window', includeUncontrolled:true }).then(clients => {
+        const existing = clients.find(client => client.url.startsWith(self.registration.scope));
+        if(existing) return existing.focus();
+        return self.clients.openWindow(destination);
+    }));
 });

@@ -2,6 +2,7 @@
   "name": "GoSleep",
   "short_name": "GoSleep",
   "description": "Schlafzeiten, Wecker und Schlaftagebuch einfach an einem Ort.",
+  "id": "./",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

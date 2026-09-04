@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gosleep-push",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "APP_ORIGIN": "https://paulfv.github.io",
+    "APP_URL": "https://paulfv.github.io/GoSleep/",
+    "VAPID_SUBJECT": "https://paulfv.github.io/GoSleep/"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "ALARM_DEVICE", "class_name": "AlarmDevice" }
+    ]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["AlarmDevice"] }
+  ]
+}

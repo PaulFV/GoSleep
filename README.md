@@ -10,6 +10,7 @@ Eine benutzerfreundliche Progressive Web App für Schlafaufzeichnung, Wecker, St
 - 📖 Editierbares Schlaftagebuch
 - 🌙 Schlafzyklus-Berechnung (Aufstehzeit basierend auf vollständigen Zyklen)
 - 📱 Installierbare und offlinefähige PWA
+- 🔔 Optionale Hintergrund-Wecker per Web Push und Cloudflare Worker
 - ♿ Zugängliche Dialoge, Formularbeschriftungen und Tastatursteuerung
 - 🎨 Neues GoSleep-App-Logo in mehreren Größen
 
@@ -38,7 +39,21 @@ GoSleep/
 Beim Hinzufügen zum Home-Bildschirm (iOS/Android) wird automatisch das
 blau-violette Halbmond-Wellen-Icon aus `icons/` verwendet.
 
-> Wichtig: Der Web-Wecker benötigt eine geöffnete Browser-App. Mobile Betriebssysteme können Webseiten im Hintergrund anhalten; GoSleep ersetzt daher keinen systemeigenen Wecker.
+> Ohne aktivierte Hintergrund-Benachrichtigungen benötigt der Web-Wecker eine geöffnete Browser-App. Mobile Betriebssysteme können Webseiten im Hintergrund anhalten.
+
+## Hintergrund-Benachrichtigungen auf dem iPhone
+
+Ab iOS 16.4 kann GoSleep auch bei geschlossener App eine Push-Benachrichtigung senden:
+
+1. Die veröffentlichte GoSleep-Seite in Safari öffnen.
+2. Über „Teilen“ → „Zum Home-Bildschirm“ installieren.
+3. GoSleep vom Home-Bildschirm starten.
+4. Unter „Profil“ die Hintergrund-Benachrichtigungen einschalten und die iOS-Abfrage erlauben.
+5. Mit „Test-Benachrichtigung senden“ die Verbindung prüfen.
+
+Der eigentliche Weckzeitpunkt wird im Cloudflare Worker gespeichert. Der private Push-Schlüssel liegt nur als Cloudflare-Secret vor und wird nicht an den Browser ausgeliefert.
+
+> Auch Push-Benachrichtigungen sind kein Ersatz für einen sicherheitskritischen oder medizinisch notwendigen Systemwecker.
 
 ---
 

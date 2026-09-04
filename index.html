@@ -12,6 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<script src="push-config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -281,6 +282,60 @@ body::before{
     font-family:var(--mono);
 }
 
+.ui-icon{
+    width:20px;
+    height:20px;
+    flex:0 0 auto;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.9;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.icon-sprite{
+    position:absolute;
+    width:0;
+    height:0;
+    overflow:hidden;
+}
+
+.card-label .ui-icon{
+    width:18px;
+    height:18px;
+    color:var(--cyan);
+}
+
+.card-action{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-top:16px;
+    padding:9px 12px;
+    min-height:40px;
+    border-radius:11px;
+    border:1px solid rgba(0,229,255,0.2);
+    background:rgba(0,229,255,0.07);
+    color:#a9f6ff;
+    font:600 13px var(--display);
+    cursor:pointer;
+}
+
+.card-action:hover,
+.card-action:focus-visible{
+    background:rgba(0,229,255,0.13);
+    border-color:rgba(0,229,255,0.42);
+}
+
+.card-action .ui-icon{ width:16px; height:16px; }
+
+.cycle-help{
+    margin:12px 0 0;
+    color:var(--text-dim);
+    font-size:12.5px;
+    line-height:1.5;
+}
+
 /* quality ring */
 .quality-row{
     display:flex;
@@ -411,6 +466,20 @@ body::before{
 
 .main-action:active{ transform:scale(0.98); }
 
+button{ cursor:pointer; }
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible{
+    outline:3px solid rgba(0,229,255,0.35);
+    outline-offset:3px;
+}
+
+button:disabled{
+    cursor:not-allowed;
+    opacity:0.45;
+}
+
 /* ---------- Bottom tab bar ---------- */
 .tabbar{
     position:fixed;
@@ -445,7 +514,15 @@ body::before{
     position:relative;
 }
 
-.tab .icon{ font-size:19px; }
+.tab .icon{
+    width:22px;
+    height:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.tab .ui-icon{ width:21px; height:21px; }
 
 .tab.active{ color:var(--cyan); }
 
@@ -503,7 +580,12 @@ body::before{
     font-size:20px;
     color:var(--text);
     font-family:var(--display);
+    display:flex;
+    align-items:center;
+    gap:9px;
 }
+
+.sheet h2 .ui-icon{ color:var(--cyan); }
 
 .sheet label{
     font-size:13px;
@@ -579,7 +661,12 @@ body::before{
     border:1px solid rgba(255,255,255,0.15);
     border-radius:8px;
     padding:4px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
+
+.tone-preview .ui-icon{ width:15px; height:15px; }
 
 .tone-option.selected .tone-preview{
     color:var(--cyan);
@@ -628,6 +715,117 @@ body::before{
     font-size:12.5px;
     margin:-9px 0 16px;
     line-height:1.45;
+}
+
+.setting-panel{
+    margin:18px 0;
+    padding:16px;
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px;
+    background:rgba(255,255,255,0.035);
+}
+
+.setting-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+}
+
+.setting-copy{
+    display:flex;
+    gap:11px;
+    align-items:flex-start;
+}
+
+.setting-copy .ui-icon{
+    margin-top:2px;
+    color:var(--cyan);
+}
+
+.setting-copy strong{
+    display:block;
+    margin-bottom:4px;
+    font-size:15px;
+}
+
+.setting-copy span{
+    display:block;
+    color:var(--text-dim);
+    font-size:12.5px;
+    line-height:1.45;
+}
+
+.switch{
+    position:relative;
+    flex:0 0 auto;
+    width:52px;
+    height:30px;
+    margin:0 !important;
+}
+
+.switch input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.switch-track{
+    position:absolute;
+    inset:0;
+    border-radius:999px;
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.12);
+    transition:background .2s ease,border-color .2s ease;
+}
+
+.switch-track::after{
+    content:'';
+    position:absolute;
+    width:22px;
+    height:22px;
+    left:3px;
+    top:3px;
+    border-radius:50%;
+    background:#dfe4f5;
+    box-shadow:0 2px 8px rgba(0,0,0,.35);
+    transition:transform .2s ease,background .2s ease;
+}
+
+.switch input:checked + .switch-track{
+    background:linear-gradient(135deg,var(--cyan),var(--violet));
+    border-color:transparent;
+}
+
+.switch input:checked + .switch-track::after{
+    transform:translateX(22px);
+    background:#071019;
+}
+
+.switch input:focus-visible + .switch-track{
+    outline:3px solid rgba(0,229,255,.35);
+    outline-offset:3px;
+}
+
+.push-status{
+    margin:12px 0 0;
+    color:var(--text-dim);
+    font-size:12.5px;
+    line-height:1.5;
+}
+
+.push-status.success{ color:#7cf6bd; }
+.push-status.error{ color:#ff8ab7; }
+
+.push-test{
+    margin-top:12px;
+    min-height:40px;
+    padding:9px 12px;
+    border-radius:10px;
+    border:1px solid rgba(0,229,255,.2);
+    background:rgba(0,229,255,.07);
+    color:#a9f6ff;
+    font:600 13px var(--display);
 }
 
 .form-message{
@@ -727,6 +925,12 @@ body::before{
     color:#05060B;
     border:none;
     background:linear-gradient(135deg,var(--cyan),var(--violet));
+}
+
+.history-actions .delete-edit{
+    color:#ff8ab7;
+    border-color:rgba(255,61,138,0.28);
+    background:rgba(255,61,138,0.1);
 }
 
 .history-editor{
@@ -908,10 +1112,37 @@ textarea:focus-visible{
     .history-editor .full{ grid-column:auto; }
 }
 
+@media (max-width:520px){
+    .header{ padding-left:16px; padding-right:16px; }
+    #userName{ display:none; }
+    .container{ padding-left:14px; padding-right:14px; }
+    .hero{ padding-top:12px; }
+    .orbit-wrap{ width:172px; height:172px; }
+    .orbit-ring.r1{ width:172px; height:172px; }
+    .orbit-ring.r2{ width:132px; height:132px; }
+    .orbit-ring.r3{ width:94px; height:94px; }
+    .moon{ width:78px; height:78px; }
+    .tab{ min-width:0; flex:1; padding-left:2px; padding-right:2px; }
+}
+
 </style>
 </head>
 
 <body>
+
+<svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5 8.5 8.5 0 1 0 20.5 14.2Z"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 5v16"/><path d="M21 12v9"/><path d="M3 17h18"/><path d="M7 12V8h5a3 3 0 0 1 3 3v1"/><path d="M3 12h18"/></symbol>
+    <symbol id="i-alarm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5"/><path d="m5 3-2 2M19 3l2 2M6 21l1.5-2M18 21l-1.5-2"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V10h4v10M10 20V4h4v16M16 20v-7h4v7"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H11v17H7.5A3.5 3.5 0 0 0 4 22Z"/><path d="M20 5.5A3.5 3.5 0 0 0 16.5 2H13v17h3.5A3.5 3.5 0 0 1 20 22Z"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+    <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M4 18h16M6 14a6 6 0 0 1 12 0M12 2v3M4.2 6.2l2.1 2.1M19.8 6.2l-2.1 2.1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M14 7l5 5-5 5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></symbol>
+</svg>
 
 <header class="header">
     <div class="logo"><img class="brand-icon" src="icons/favicon-32.png" alt="">GOSLEEP</div>
@@ -932,7 +1163,7 @@ textarea:focus-visible{
                 <img src="icons/icon-192.png" alt="GoSleep – leuchtender Halbmond">
             </div>
         </div>
-        <p id="heroText">System bereit</p>
+        <p id="heroText">Bereit für eine erholsame Nacht</p>
 
         <div class="wave-box">
             <svg viewBox="0 0 400 46" preserveAspectRatio="none">
@@ -953,12 +1184,12 @@ textarea:focus-visible{
         </div>
     </div>
 
-    <button type="button" class="main-action" id="sleepBtn">🌙 Schlafmodus starten</button>
+    <button type="button" class="main-action" id="sleepBtn"><svg class="ui-icon" aria-hidden="true"><use href="#i-moon"></use></svg><span>Schlaf aufzeichnen</span></button>
 
     <div class="cards">
 
         <div class="card">
-            <div class="card-label">😴 Schlafqualität</div>
+            <div class="card-label"><svg class="ui-icon" aria-hidden="true"><use href="#i-bed"></use></svg>Schlafqualität</div>
             <div class="quality-row">
                 <div class="ring" id="qualityRing">
                     <div class="ring-inner" id="qualityValue">–</div>
@@ -968,24 +1199,28 @@ textarea:focus-visible{
                     <p>Letzte Nacht</p>
                 </div>
             </div>
+            <button type="button" class="card-action" data-open="stats"><svg class="ui-icon" aria-hidden="true"><use href="#i-arrow"></use></svg>Verlauf ansehen</button>
         </div>
 
         <div class="card">
-            <div class="card-label">⏰ Nächster Wecker</div>
+            <div class="card-label"><svg class="ui-icon" aria-hidden="true"><use href="#i-alarm"></use></svg>Nächster Wecker</div>
             <p class="big-value" id="alarmValue">–:–</p>
             <p class="sub-value" id="alarmDaysLabel">Kein Wecker aktiv</p>
+            <button type="button" class="card-action" data-open="alarm"><svg class="ui-icon" aria-hidden="true"><use href="#i-arrow"></use></svg>Wecker einstellen</button>
         </div>
 
         <div class="card">
-            <div class="card-label">📊 Statistik</div>
+            <div class="card-label"><svg class="ui-icon" aria-hidden="true"><use href="#i-chart"></use></svg>Dein Überblick</div>
             <div class="stat-line"><span>Woche</span><span id="statWeek">–</span></div>
             <div class="stat-line"><span>Monat</span><span id="statMonth">–</span></div>
             <div class="stat-line"><span>Qualität</span><span id="statQuality">–</span></div>
+            <button type="button" class="card-action" data-open="stats"><svg class="ui-icon" aria-hidden="true"><use href="#i-arrow"></use></svg>Alle Nächte</button>
         </div>
 
         <div class="card wide">
-            <div class="card-label">🌙 Schlafzyklus – wenn du jetzt einschläfst</div>
+            <div class="card-label"><svg class="ui-icon" aria-hidden="true"><use href="#i-moon"></use></svg>Passende Aufstehzeiten</div>
             <ul class="cycle-list" id="cycleList"></ul>
+            <p class="cycle-help">Berechnet mit etwa 90 Minuten pro Schlafzyklus. Die Zeiten dienen als Orientierung.</p>
         </div>
 
     </div>
@@ -995,19 +1230,19 @@ textarea:focus-visible{
 <!-- Bottom Tab Bar -->
 <nav class="tabbar" aria-label="Hauptnavigation">
     <button type="button" class="tab active" data-tab="home" aria-current="page">
-        <span class="icon">🏠</span>Start
+        <span class="icon"><svg class="ui-icon" aria-hidden="true"><use href="#i-home"></use></svg></span>Start
     </button>
     <button type="button" class="tab" id="alarmBtn">
-        <span class="icon">⏰</span>Wecker
+        <span class="icon"><svg class="ui-icon" aria-hidden="true"><use href="#i-alarm"></use></svg></span>Wecker
     </button>
     <button type="button" class="tab" id="statsBtn">
-        <span class="icon">📊</span>Stats
+        <span class="icon"><svg class="ui-icon" aria-hidden="true"><use href="#i-chart"></use></svg></span>Verlauf
     </button>
     <button type="button" class="tab" id="journalBtn">
-        <span class="icon">📖</span>Log
+        <span class="icon"><svg class="ui-icon" aria-hidden="true"><use href="#i-book"></use></svg></span>Notizen
     </button>
     <button type="button" class="tab" id="settingsBtn">
-        <span class="icon">⚙</span>Mehr
+        <span class="icon"><svg class="ui-icon" aria-hidden="true"><use href="#i-settings"></use></svg></span>Profil
     </button>
 </nav>
 
@@ -1015,7 +1250,7 @@ textarea:focus-visible{
 <div class="sheet-overlay" id="alarmOverlay" role="dialog" aria-modal="true" aria-labelledby="alarmTitle" aria-hidden="true">
     <div class="sheet" tabindex="-1">
         <div class="sheet-handle"></div>
-        <h2 id="alarmTitle">⏰ Wecker einstellen</h2>
+        <h2 id="alarmTitle"><svg class="ui-icon" aria-hidden="true"><use href="#i-alarm"></use></svg> Wecker einstellen</h2>
         <p class="sheet-intro">Wähle Uhrzeit, Tage und deinen bevorzugten Klang.</p>
         <label for="alarmTimeInput">Weckzeit</label>
         <input type="time" id="alarmTimeInput" required>
@@ -1033,23 +1268,23 @@ textarea:focus-visible{
         <div class="tone-list" id="toneList" role="group" aria-labelledby="toneLabel">
             <button type="button" class="tone-option" data-tone="classic">
                 <span class="tone-name">Klassisch</span>
-                <span class="tone-preview">▶</span>
+                <span class="tone-preview"><svg class="ui-icon" aria-hidden="true"><use href="#i-play"></use></svg></span>
             </button>
             <button type="button" class="tone-option" data-tone="soft">
                 <span class="tone-name">Sanft</span>
-                <span class="tone-preview">▶</span>
+                <span class="tone-preview"><svg class="ui-icon" aria-hidden="true"><use href="#i-play"></use></svg></span>
             </button>
             <button type="button" class="tone-option" data-tone="digital">
                 <span class="tone-name">Digital</span>
-                <span class="tone-preview">▶</span>
+                <span class="tone-preview"><svg class="ui-icon" aria-hidden="true"><use href="#i-play"></use></svg></span>
             </button>
             <button type="button" class="tone-option" data-tone="pulse">
                 <span class="tone-name">Puls</span>
-                <span class="tone-preview">▶</span>
+                <span class="tone-preview"><svg class="ui-icon" aria-hidden="true"><use href="#i-play"></use></svg></span>
             </button>
             <button type="button" class="tone-option" data-tone="chime">
                 <span class="tone-name">Glocke</span>
-                <span class="tone-preview">▶</span>
+                <span class="tone-preview"><svg class="ui-icon" aria-hidden="true"><use href="#i-play"></use></svg></span>
             </button>
         </div>
         <p class="field-help">Hinweis: Für den Alarm muss GoSleep im Browser geöffnet bleiben.</p>
@@ -1068,7 +1303,7 @@ textarea:focus-visible{
 <div class="sheet-overlay" id="statsOverlay" role="dialog" aria-modal="true" aria-labelledby="statsTitle" aria-hidden="true">
     <div class="sheet" tabindex="-1">
         <div class="sheet-handle"></div>
-        <h2 id="statsTitle">📊 Deine Schlafhistorie</h2>
+        <h2 id="statsTitle"><svg class="ui-icon" aria-hidden="true"><use href="#i-chart"></use></svg> Deine Schlafhistorie</h2>
         <p class="sheet-intro">Tippe auf „Bearbeiten“, um Datum oder Schlafdauer zu korrigieren.</p>
         <div id="statsHistory"></div>
         <div class="sheet-actions">
@@ -1081,7 +1316,7 @@ textarea:focus-visible{
 <div class="sheet-overlay" id="journalOverlay" role="dialog" aria-modal="true" aria-labelledby="journalTitle" aria-hidden="true">
     <div class="sheet" tabindex="-1">
         <div class="sheet-handle"></div>
-        <h2 id="journalTitle">📖 Schlaftagebuch</h2>
+        <h2 id="journalTitle"><svg class="ui-icon" aria-hidden="true"><use href="#i-book"></use></svg> Schlaftagebuch</h2>
         <p class="sheet-intro">Halte kurz fest, was deinen Schlaf beeinflusst hat.</p>
         <label for="journalInput">Neuer Eintrag</label>
         <textarea id="journalInput" maxlength="1000" placeholder="Zum Beispiel: spät Kaffee getrunken, schnell eingeschlafen …"></textarea>
@@ -1098,13 +1333,27 @@ textarea:focus-visible{
 <div class="sheet-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" aria-hidden="true">
     <div class="sheet" tabindex="-1">
         <div class="sheet-handle"></div>
-        <h2 id="settingsTitle">⚙ Einstellungen</h2>
+        <h2 id="settingsTitle"><svg class="ui-icon" aria-hidden="true"><use href="#i-settings"></use></svg> Einstellungen</h2>
         <p class="sheet-intro">Passe GoSleep an deinen persönlichen Schlafrhythmus an.</p>
         <label for="nameInput">Dein Name</label>
         <input type="text" id="nameInput" maxlength="30" autocomplete="name" placeholder="Dein Name">
         <label for="targetInput">Schlafziel in Stunden</label>
         <input type="number" id="targetInput" min="4" max="14" step="0.5" inputmode="decimal" placeholder="z. B. 8">
         <p class="field-help">Empfohlener Bereich: 4 bis 14 Stunden.</p>
+        <div class="setting-panel">
+            <div class="setting-row">
+                <div class="setting-copy">
+                    <svg class="ui-icon" aria-hidden="true"><use href="#i-bell"></use></svg>
+                    <div><strong>Hintergrund-Benachrichtigungen</strong><span>Weckt dich auch, wenn GoSleep geschlossen ist.</span></div>
+                </div>
+                <label class="switch" aria-label="Hintergrund-Benachrichtigungen aktivieren">
+                    <input type="checkbox" id="pushToggle" role="switch">
+                    <span class="switch-track"></span>
+                </label>
+            </div>
+            <p class="push-status" id="pushStatus">Status wird geprüft …</p>
+            <button type="button" class="push-test" id="testPushBtn" disabled>Test-Benachrichtigung senden</button>
+        </div>
         <p class="form-message" id="settingsMessage" role="alert"></p>
         <div class="sheet-actions">
             <button type="button" class="btn-secondary" data-close="settingsOverlay">Abbrechen</button>
@@ -1150,8 +1399,11 @@ const state = {
     alarmDays: loadArray('gs_alarmDays', [1,2,3,4,5]),
     sleepStart: localStorage.getItem('gs_sleepStart') || null,
     log: loadArray('gs_log', []),
-    journal: loadArray('gs_journal', [])
+    journal: loadArray('gs_journal', []),
+    pushEnabled: localStorage.getItem('gs_pushEnabled') === 'true'
 };
+
+const PUSH_API_URL = String(window.GOSLEEP_PUSH_API || '').replace(/\/$/, '');
 
 let draftAlarmTone = state.alarmTone;
 let editingSleepIndex = null;
@@ -1301,7 +1553,7 @@ function renderStatsHistory(){
                 '<div class="history-editor"><label for="sleepDate-' + index + '">Datum<input id="sleepDate-' + index + '" type="date" value="' + formatDateInput(d) + '"></label>' +
                 '<label for="sleepHours-' + index + '">Stunden<input id="sleepHours-' + index + '" type="number" min="0" max="24" step="1" value="' + hours + '"></label>' +
                 '<label for="sleepMinutes-' + index + '">Minuten<input id="sleepMinutes-' + index + '" type="number" min="0" max="59" step="1" value="' + minutes + '"></label></div>' +
-                '<div class="history-actions"><button type="button" class="save-edit" data-save-sleep="' + index + '">Speichern</button><button type="button" data-cancel-sleep>Abbrechen</button></div></article>';
+                '<div class="history-actions"><button type="button" class="save-edit" data-save-sleep="' + index + '">Speichern</button><button type="button" class="delete-edit" data-delete-sleep="' + index + '">Löschen</button><button type="button" data-cancel-sleep>Abbrechen</button></div></article>';
         }
         return '<article class="history-entry"><div class="history-row"><div><div class="history-date">' + d.toLocaleDateString('de-DE') +
             '</div><div class="history-value">' + fmtDuration(entry.durationMin) + ' · ' + entry.quality +
@@ -1323,12 +1575,12 @@ const heroText = document.getElementById('heroText');
 
 function updateSleepButton(){
     if(state.sleepStart){
-        sleepBtn.textContent = '☀️ Aufwachen & Schlaf speichern';
+        sleepBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true"><use href="#i-sunrise"></use></svg><span>Aufwachen & Schlaf speichern</span>';
         sleepBtn.classList.add('active');
         sleepBtn.setAttribute('aria-pressed','true');
         heroText.textContent = 'Schlafaufzeichnung läuft';
     } else {
-        sleepBtn.textContent = '🌙 Schlafmodus starten';
+        sleepBtn.innerHTML = '<svg class="ui-icon" aria-hidden="true"><use href="#i-moon"></use></svg><span>Schlaf aufzeichnen</span>';
         sleepBtn.classList.remove('active');
         sleepBtn.setAttribute('aria-pressed','false');
         heroText.textContent = 'Bereit für eine erholsame Nacht';
@@ -1470,6 +1722,7 @@ document.getElementById('saveAlarmBtn').addEventListener('click', () => {
     renderAlarmCard();
     closeSheet('alarmOverlay');
     showToast('Wecker für ' + time + ' Uhr gespeichert.');
+    syncPushSchedule().catch(() => showToast('Wecker gespeichert, Push-Synchronisierung fehlgeschlagen.'));
 });
 
 document.getElementById('disableAlarmBtn').addEventListener('click', () => {
@@ -1480,6 +1733,7 @@ document.getElementById('disableAlarmBtn').addEventListener('click', () => {
     renderAlarmCard();
     closeSheet('alarmOverlay');
     showToast('Wecker ausgeschaltet.');
+    syncPushSchedule().catch(() => showToast('Wecker ausgeschaltet, Push-Synchronisierung fehlgeschlagen.'));
 });
 
 document.getElementById('statsBtn').addEventListener('click', () => {
@@ -1489,9 +1743,23 @@ document.getElementById('statsBtn').addEventListener('click', () => {
     setActiveTab('statsBtn');
 });
 
+document.querySelectorAll('[data-open]').forEach(button => {
+    button.addEventListener('click', () => {
+        const targets = {
+            alarm:'alarmBtn',
+            stats:'statsBtn',
+            journal:'journalBtn',
+            settings:'settingsBtn'
+        };
+        const target = document.getElementById(targets[button.dataset.open]);
+        if(target) target.click();
+    });
+});
+
 document.getElementById('statsHistory').addEventListener('click', event => {
     const editButton = event.target.closest('[data-edit-sleep]');
     const saveButton = event.target.closest('[data-save-sleep]');
+    const deleteButton = event.target.closest('[data-delete-sleep]');
     if(editButton){
         editingSleepIndex = Number(editButton.dataset.editSleep);
         renderStatsHistory();
@@ -1517,6 +1785,18 @@ document.getElementById('statsHistory').addEventListener('click', event => {
         renderSleepCard();
         renderStatsCard();
         showToast('Schlafeintrag aktualisiert.');
+    } else if(deleteButton){
+        const index = Number(deleteButton.dataset.deleteSleep);
+        const entry = state.log[index];
+        const entryDate = entry ? new Date(entry.date).toLocaleDateString('de-DE') : 'diesen Tag';
+        if(!window.confirm('Schlafeintrag vom ' + entryDate + ' wirklich löschen?')) return;
+        state.log.splice(index, 1);
+        save('gs_log', state.log);
+        editingSleepIndex = null;
+        renderStatsHistory();
+        renderSleepCard();
+        renderStatsCard();
+        showToast('Schlafeintrag gelöscht.');
     } else if(event.target.closest('[data-cancel-sleep]')){
         editingSleepIndex = null;
         renderStatsHistory();
@@ -1572,10 +1852,184 @@ document.getElementById('journalHistory').addEventListener('click', event => {
     }
 });
 
+function setPushStatus(message, type){
+    const status = document.getElementById('pushStatus');
+    status.textContent = message;
+    status.className = 'push-status' + (type ? ' ' + type : '');
+}
+
+function pushSupported(){
+    return 'serviceWorker' in navigator && 'PushManager' in window && 'Notification' in window;
+}
+
+function isIOSDevice(){
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+}
+
+function isStandaloneApp(){
+    return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function base64UrlToBytes(value){
+    const padding = '='.repeat((4 - value.length % 4) % 4);
+    const binary = atob((value + padding).replace(/-/g, '+').replace(/_/g, '/'));
+    return Uint8Array.from(binary, char => char.charCodeAt(0));
+}
+
+function randomBase64Url(bytes){
+    const values = new Uint8Array(bytes);
+    crypto.getRandomValues(values);
+    let binary = '';
+    values.forEach(value => binary += String.fromCharCode(value));
+    return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function getPushIdentity(){
+    let deviceId = localStorage.getItem('gs_pushDeviceId');
+    let deviceSecret = localStorage.getItem('gs_pushDeviceSecret');
+    if(!deviceId){
+        deviceId = crypto.randomUUID ? crypto.randomUUID() : randomBase64Url(18);
+        localStorage.setItem('gs_pushDeviceId', deviceId);
+    }
+    if(!deviceSecret){
+        deviceSecret = randomBase64Url(32);
+        localStorage.setItem('gs_pushDeviceSecret', deviceSecret);
+    }
+    return { deviceId, deviceSecret };
+}
+
+async function pushRequest(path, options = {}){
+    if(!PUSH_API_URL) throw new Error('Push-Server ist noch nicht konfiguriert.');
+    const { deviceSecret } = getPushIdentity();
+    const response = await fetch(PUSH_API_URL + path, {
+        ...options,
+        headers:{
+            'Content-Type':'application/json',
+            'Authorization':'Bearer ' + deviceSecret,
+            ...(options.headers || {})
+        }
+    });
+    if(!response.ok){
+        const detail = await response.json().catch(() => ({}));
+        throw new Error(detail.error || 'Push-Server nicht erreichbar.');
+    }
+    return response.json().catch(() => ({}));
+}
+
+async function syncPushSchedule(subscription){
+    if(!state.pushEnabled || !PUSH_API_URL) return;
+    const registration = await navigator.serviceWorker.ready;
+    const activeSubscription = subscription || await registration.pushManager.getSubscription();
+    if(!activeSubscription) throw new Error('Keine aktive Push-Anmeldung gefunden.');
+    const { deviceId } = getPushIdentity();
+    await pushRequest('/api/devices/' + encodeURIComponent(deviceId), {
+        method:'PUT',
+        body:JSON.stringify({
+            subscription:activeSubscription.toJSON(),
+            alarm:{
+                enabled:Boolean(state.alarmTime),
+                time:state.alarmTime,
+                days:state.alarmDays,
+                timezone:Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/Berlin'
+            }
+        })
+    });
+}
+
+async function enableBackgroundPush(){
+    if(!PUSH_API_URL) throw new Error('Der Cloudflare Push-Server ist noch nicht verbunden.');
+    if(!pushSupported()){
+        if(isIOSDevice() && !isStandaloneApp()) throw new Error('Füge GoSleep zuerst zum iPhone-Home-Bildschirm hinzu und öffne es von dort.');
+        throw new Error('Dieser Browser unterstützt keine Hintergrund-Benachrichtigungen.');
+    }
+    if(isIOSDevice() && !isStandaloneApp()) throw new Error('Füge GoSleep zuerst zum iPhone-Home-Bildschirm hinzu und öffne es von dort.');
+    const permission = await Notification.requestPermission();
+    if(permission !== 'granted') throw new Error('Benachrichtigungen wurden nicht erlaubt. Du kannst sie in den iPhone-Einstellungen freigeben.');
+
+    const keyResponse = await fetch(PUSH_API_URL + '/vapid-public-key');
+    if(!keyResponse.ok) throw new Error('Der Push-Server ist nicht erreichbar.');
+    const { publicKey } = await keyResponse.json();
+    if(!publicKey) throw new Error('Der Push-Server ist noch nicht vollständig eingerichtet.');
+
+    const registration = await navigator.serviceWorker.ready;
+    let subscription = await registration.pushManager.getSubscription();
+    if(!subscription){
+        subscription = await registration.pushManager.subscribe({
+            userVisibleOnly:true,
+            applicationServerKey:base64UrlToBytes(publicKey)
+        });
+    }
+    state.pushEnabled = true;
+    save('gs_pushEnabled', true);
+    await syncPushSchedule(subscription);
+}
+
+async function disableBackgroundPush(){
+    const registration = pushSupported() ? await navigator.serviceWorker.ready : null;
+    const subscription = registration ? await registration.pushManager.getSubscription() : null;
+    const deviceId = localStorage.getItem('gs_pushDeviceId');
+    if(PUSH_API_URL && deviceId){
+        await pushRequest('/api/devices/' + encodeURIComponent(deviceId), { method:'DELETE' });
+    }
+    if(subscription) await subscription.unsubscribe();
+    state.pushEnabled = false;
+    save('gs_pushEnabled', false);
+}
+
+function refreshPushControls(){
+    const toggle = document.getElementById('pushToggle');
+    const testButton = document.getElementById('testPushBtn');
+    toggle.checked = state.pushEnabled;
+    toggle.disabled = !PUSH_API_URL;
+    testButton.disabled = !state.pushEnabled || !PUSH_API_URL;
+    if(!PUSH_API_URL){
+        setPushStatus('Der Cloudflare Push-Server wird noch eingerichtet.');
+    } else if(!pushSupported()){
+        setPushStatus(isIOSDevice() ? 'Auf dem iPhone: GoSleep zum Home-Bildschirm hinzufügen und von dort öffnen.' : 'Push wird von diesem Browser nicht unterstützt.');
+    } else if(typeof Notification !== 'undefined' && Notification.permission === 'denied'){
+        setPushStatus('Benachrichtigungen sind im System blockiert.', 'error');
+    } else if(state.pushEnabled){
+        setPushStatus(state.alarmTime ? 'Aktiv – der Wecker wird im Hintergrund synchronisiert.' : 'Aktiv – stelle jetzt einen Wecker ein.', 'success');
+    } else {
+        setPushStatus('Ausgeschaltet. Es werden keine Push-Nachrichten gesendet.');
+    }
+}
+
+document.getElementById('pushToggle').addEventListener('change', async event => {
+    const toggle = event.currentTarget;
+    toggle.disabled = true;
+    setPushStatus(toggle.checked ? 'Benachrichtigungen werden aktiviert …' : 'Benachrichtigungen werden ausgeschaltet …');
+    try{
+        if(toggle.checked) await enableBackgroundPush();
+        else await disableBackgroundPush();
+        refreshPushControls();
+    } catch(error){
+        toggle.checked = state.pushEnabled;
+        toggle.disabled = !PUSH_API_URL;
+        setPushStatus(error.message || 'Benachrichtigungen konnten nicht geändert werden.', 'error');
+    }
+});
+
+document.getElementById('testPushBtn').addEventListener('click', async event => {
+    const button = event.currentTarget;
+    button.disabled = true;
+    setPushStatus('Test-Benachrichtigung wird gesendet …');
+    try{
+        const { deviceId } = getPushIdentity();
+        await pushRequest('/api/devices/' + encodeURIComponent(deviceId) + '/test', { method:'POST', body:'{}' });
+        setPushStatus('Test gesendet – die Nachricht sollte gleich erscheinen.', 'success');
+    } catch(error){
+        setPushStatus(error.message || 'Test konnte nicht gesendet werden.', 'error');
+    } finally {
+        button.disabled = !state.pushEnabled;
+    }
+});
+
 document.getElementById('settingsBtn').addEventListener('click', () => {
     document.getElementById('nameInput').value = state.userName;
     document.getElementById('targetInput').value = state.targetHours;
     document.getElementById('settingsMessage').textContent = '';
+    refreshPushControls();
     openSheet('settingsOverlay');
     setActiveTab('settingsBtn');
 });
@@ -1721,6 +2175,7 @@ document.getElementById('snoozeBtn').addEventListener('click', () => {
     lastTriggeredKey = '';
     localStorage.removeItem('gs_lastTriggeredKey');
     showToast('Wecker um 5 Minuten verschoben.');
+    syncPushSchedule().catch(() => showToast('Schlummerzeit gespeichert, Push-Synchronisierung fehlgeschlagen.'));
 });
 
 function checkAlarm(){
@@ -1745,7 +2200,14 @@ document.addEventListener('click', function unlockAudioOnce(){
 }, { once: true });
 
 if('serviceWorker' in navigator){
-    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    window.addEventListener('load', async () => {
+        try{
+            await navigator.serviceWorker.register('./sw.js');
+            if(state.pushEnabled) await syncPushSchedule();
+        } catch(error){
+            if(state.pushEnabled) showToast('Hintergrund-Wecker konnte nicht synchronisiert werden.');
+        }
+    });
 }
 
 </script>
