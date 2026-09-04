@@ -1,31 +1,29 @@
-<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="bgGlow" cx="50%" cy="35%" r="75%">
-      <stop offset="0%" stop-color="#141A2E"/>
-      <stop offset="100%" stop-color="#05060B"/>
+    <radialGradient id="background" cx="50%" cy="42%" r="72%">
+      <stop offset="0%" stop-color="#0B1847"/>
+      <stop offset="60%" stop-color="#040A25"/>
+      <stop offset="100%" stop-color="#020617"/>
     </radialGradient>
-    <linearGradient id="moonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#6BFFB0"/>
-      <stop offset="100%" stop-color="#22E06A"/>
+    <linearGradient id="moon" x1="20%" y1="10%" x2="82%" y2="90%">
+      <stop offset="0%" stop-color="#76F7FF"/>
+      <stop offset="35%" stop-color="#00B7FF"/>
+      <stop offset="72%" stop-color="#5648FF"/>
+      <stop offset="100%" stop-color="#A15CFF"/>
     </linearGradient>
-    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-      <feGaussianBlur stdDeviation="14" result="blur1"/>
-      <feMerge>
-        <feMergeNode in="blur1"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+    <linearGradient id="wave" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5B4BFF"/>
+      <stop offset="52%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#50FFC4"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
-  <!-- background -->
-  <rect x="0" y="0" width="512" height="512" rx="112" fill="url(#bgGlow)"/>
-
-  <!-- faint ring -->
-  <circle cx="256" cy="256" r="196" fill="none" stroke="#22E06A" stroke-opacity="0.16" stroke-width="2"/>
-
-  <!-- crescent moon, neon green, glowing -->
+  <rect width="1024" height="1024" rx="220" fill="url(#background)"/>
   <g filter="url(#glow)">
-    <path d="M330 60C220 60 130 150 130 260C130 370 220 460 330 460C362 460 392 452 418 438C378 448 335 434 305 404C255 354 255 246 305 196C328 173 358 158 390 158C400 158 410 159 419 161C400 105 368 60 330 60Z"
-      fill="url(#moonGrad)"/>
+    <path fill="url(#moon)" d="M606 160c-202 16-360 185-360 390 0 216 175 391 391 391 112 0 213-47 284-123-55 31-118 49-186 49-207 0-375-168-375-375 0-148 85-276 209-337 12-6 25-11 37-15Z"/>
+    <path fill="none" stroke="url(#wave)" stroke-linecap="round" stroke-width="42" d="M332 663c65 0 78-96 145-96 73 0 86 113 164 113 83 0 92-126 173-126 35 0 62 19 86 43"/>
   </g>
 </svg>

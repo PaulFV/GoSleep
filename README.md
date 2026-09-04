@@ -1,19 +1,21 @@
 # 🌙 GoSleep
 
-Eine einfache, dunkle Dashboard-Oberfläche zur Schlafüberwachung – als statische HTML/CSS-Seite umgesetzt.
+Eine benutzerfreundliche Progressive Web App für Schlafaufzeichnung, Wecker, Statistiken und persönliche Schlafnotizen. Alles läuft lokal im Browser – ohne Konto und ohne Backend.
 
 ## Features
 
-- 😴 Anzeige der Schlafqualität mit Fortschrittsbalken
-- ⏰ Anzeige des nächsten Weckers
-- 📊 Wochen-/Monatsstatistik
+- 😴 Schlafmodus mit lokaler Aufzeichnung und Qualitätsanzeige
+- ⏰ Wecker mit Wochentagen, fünf Tönen, Schlummern und Ausschalten
+- 📊 Editierbare Schlafhistorie mit Wochen-/Monatsstatistik
+- 📖 Editierbares Schlaftagebuch
 - 🌙 Schlafzyklus-Berechnung (Aufstehzeit basierend auf vollständigen Zyklen)
-- Responsives Karten-Layout (Grid)
-- Dunkles Design mit Akzentfarbe Cyan (#00BCD4)
+- 📱 Installierbare und offlinefähige PWA
+- ♿ Zugängliche Dialoge, Formularbeschriftungen und Tastatursteuerung
+- 🎨 Neues GoSleep-App-Logo in mehreren Größen
 
 ## Nutzung
 
-Einfach `index.html` im Browser öffnen – keine Abhängigkeiten, kein Build-Prozess nötig.
+Die App benötigt keine Abhängigkeiten und keinen Build-Prozess. Für PWA- und Offline-Funktionen muss sie über HTTPS oder einen lokalen Webserver geöffnet werden.
 
 ```bash
 open index.html
@@ -23,24 +25,21 @@ open index.html
 
 ```
 GoSleep/
-├── index.html        # Komplette App (HTML + CSS + JS inline, inkl. eingebetteter Icons)
-├── manifest.json      # Web-App-Manifest fürs Hinzufügen zum Home-Bildschirm
-├── icon-source.svg    # Quell-SVG des App-Icons (Neon-Grün-Halbmond)
-├── icons/              # Generierte PNG-Icons (512, 192, apple-touch, favicon)
+├── index.html         # Komplette App (HTML, CSS und JavaScript)
+├── manifest.json      # Web-App-Manifest
+├── sw.js              # Offline-Cache der PWA
+├── icon-source.svg    # Editierbare Vektorversion des App-Logos
+├── icons/             # App-Icons von 32 bis 1024 Pixel
 └── README.md
 ```
 
 ## App-Icon
 
 Beim Hinzufügen zum Home-Bildschirm (iOS/Android) wird automatisch das
-Neon-Grün-Halbmond-Icon aus `icons/` verwendet.
+blau-violette Halbmond-Wellen-Icon aus `icons/` verwendet.
 
-## Nächste Schritte / Ideen
-
-- Buttons (Schlafen, Wecker, Statistik, Tagebuch, Einstellungen) mit Funktionalität verknüpfen
-- Daten dynamisch statt statisch anzeigen (z. B. via LocalStorage oder Backend)
-- JavaScript für echte Wecker- und Timer-Logik ergänzen
+> Wichtig: Der Web-Wecker benötigt eine geöffnete Browser-App. Mobile Betriebssysteme können Webseiten im Hintergrund anhalten; GoSleep ersetzt daher keinen systemeigenen Wecker.
 
 ---
 
-GoSleep v1.0 • Sleep Better
+GoSleep v2.0 • Sleep Better
