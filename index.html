@@ -2202,7 +2202,8 @@ document.addEventListener('click', function unlockAudioOnce(){
 if('serviceWorker' in navigator){
     window.addEventListener('load', async () => {
         try{
-            await navigator.serviceWorker.register('./sw.js');
+            const registration = await navigator.serviceWorker.register('./sw.js?v=5', { updateViaCache:'none' });
+            await registration.update();
             if(state.pushEnabled) await syncPushSchedule();
         } catch(error){
             if(state.pushEnabled) showToast('Hintergrund-Wecker konnte nicht synchronisiert werden.');

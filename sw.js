@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gosleep-v4';
+const CACHE_NAME = 'gosleep-v5';
 const APP_ASSETS = [
     './',
     './index.html',
@@ -27,18 +27,26 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
     if(event.request.method !== 'GET') return;
-    event.respondWith(
-        caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
-            if(response.ok && new URL(event.request.url).origin === self.location.origin){
-                const copy = response.clone();
-                caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+    const url = new URL(event.request.url);
+    const needsFreshCopy = event.request.mode === 'navigate' || url.pathname.endsWith('/push-config.js');
+
+    if(needsFreshCopy){
+        event.respondWith(fetch(event.request).then(response => {
+            if(response.ok && url.origin === self.location.origin){
+                const cacheKey = event.request.mode === 'navigate' ? './index.html' : event.request;
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(cacheKey, response.clone())));
             }
             return response;
-        }).catch(() => {
-            if(event.request.mode === 'navigate') return caches.match('./index.html');
-            throw new Error('Offline resource unavailable');
-        }))
-    );
+        }).catch(() => caches.match(event.request.mode === 'navigate' ? './index.html' : event.request)));
+        return;
+    }
+
+    event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
+        if(response.ok && url.origin === self.location.origin){
+            event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.put(event.request, response.clone())));
+        }
+        return response;
+    })));
 });
 
 self.addEventListener('push', event => {
